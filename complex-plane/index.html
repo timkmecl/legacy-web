@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Complex func.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+    <script src="main.js"></script>
+    <script src="Function.js"></script>
+    <script src="Canvas.js"></script>
+    <script src="Grid.js"></script>
+    <script src="Line.js"></script>
+    <script src="Point.js"></script>
+
+
+
+    <script src="complex.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.7.0/math.min.js"></script>
+</head>
+
+<body onload="start()">
+    <div class="container-fluid">
+        <div class="row">
+            <canvas class="col-md-9 order-md-2" id="canvas" height="100" width="100" onmousemove="move(event)"
+                onmousedown="clicked(true, event)" onmouseup="clicked(false, event)"></canvas>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="col-md-3 order-md-1 shadow" id="sidebar">
+                <div class="input-group shadow" id="functInGroup">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">f:</span>
+                    </div>
+                    <input id="functIn" type="text" class="form-control" placeholder="f(x)">
+                </div>
+                <div class="btn-group justify-content-center" style="width:100%" role="group">
+                    <button type="button" class="btn btn-outline-primary" id="fId">Identity</button>
+                    <button type="button" class="btn btn-outline-primary" id="fAnim">Animate</button>
+                    <button type="button" class="btn btn-outline-primary" id="fFx">f(x)</button>
+                </div>
+                <input type="range" min="1" max="101" value="1" class="slider" id="fAnimStep">
+
+                <hr class="mt-4">
+                <!--
+                    <div>
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item"><a class="page-link" href="#">View</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Params</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Grids</a></li>
+                            </ul>
+                        </nav>
+                    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div>
+                    <h5 class="text-muted mt-4">View</h5>
+                    <div class="input-group mb-2 shadow" id="pInGroup">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Center</span>
+                        </div>
+                        <input id="vPReIn" type="text" class="form-control" placeholder="re">
+                        <input id="vPImIn" type="text" class="form-control" placeholder="im">
+                    </div>
+                    <div class="input-group shadow" id="sInGroup">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Size</span>
+                        </div>
+                        <input id="vSReIn" type="text" class="form-control" placeholder="Width in units">
+                    </div>
+                </div>
+
+
+
+                <div>
+                    <h5 class="text-muted mt-4 p-1">Objects
+                        <a id="add-grid" href="#" class="btn btn-outline-primary btn-sm" style="float:right">Grid</a>
+                        <a id="add-line" href="#" class="btn btn-outline-primary btn-sm mr-1"
+                            style="float:right">Line</a>
+                        <a id="add-point" href="#" class="btn btn-outline-primary btn-sm mr-1"
+                            style="float:right">Point</a>
+                    </h5>
+
+
+                    <div class="card shadow mb-2" id="grid-0">
+                        <div class="card-body pt-3 pb-3">
+                            <a href="#" class="btn btn-success btn-sm mb-1 show-grid" style="float:left">Visible</a>
+                            Grid
+                            <a href="#" class="btn btn-outline-danger btn-sm mb-1 grid-del" style="float:right">del</a>
+                            <div class="input-group mb-1 input-group-sm" id="pInGroup">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Center</span>
+                                </div>
+                                <input type="text" class="form-control grid-pos-re" placeholder="z">
+                            </div>
+                            <div class="input-group mb-1 input-group-sm" id="psInGroup">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Size</span>
+                                </div>
+                                <input type="text" class="form-control grid-size" placeholder="In units">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Density</span>
+                                </div>
+                                <input type="text" class="form-control grid-dens" placeholder="Per unit">
+                            </div>
+                            <div class="input-group input-group-sm" id="psInGroup">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Precision</span>
+                                </div>
+                                <input type="text" class="form-control grid-prec" placeholder="Per grid unit">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card shadow mb-2" id="line-0">
+                        <div class="card-body pt-3 pb-3">
+                            <a href="#" class="btn btn-success btn-sm mb-1 show-line" style="float:left">Visible</a>
+                            Line
+                            <a href="#" class="btn btn-outline-danger btn-sm mb-1 line-del" style="float:right">del</a>
+                            <div class="input-group mb-1 input-group-sm" id="pInGroup">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Center</span>
+                                </div>
+                                <input type="text" class="form-control line-pos-re" placeholder="z">
+                            </div>
+                            <div class="input-group mb-1 input-group-sm" id="psInGroup">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Length</span>
+                                </div>
+                                <input type="text" class="form-control line-len" placeholder="In units">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Angle</span>
+                                </div>
+                                <input type="text" class="form-control line-ang" placeholder="In rad">
+                            </div>
+                            <div class="input-group input-group-sm" id="psInGroup">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Precision</span>
+                                </div>
+                                <input type="text" class="form-control line-prec" placeholder="Per unit">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card shadow mb-2" id="point-0">
+                        <div class="card-body pt-3 pb-3">
+                            <a href="#" class="btn btn-success btn-sm mb-1 show-point" style="float:left">Visible</a>
+                            Point
+                            <a href="#" class="btn btn-outline-danger btn-sm mb-1 point-del" style="float:right">del</a>
+                            <div class="input-group mb-1 input-group-sm" id="pInGroup">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Position</span>
+                                </div>
+                                <input type="text" class="form-control point-pos" placeholder="z">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="mb-3">
+                    <h5 class="text-muted mt-4 p-1">Parameters
+                            <a id="add-param" href="#" class="btn btn-outline-primary btn-sm" style="float:right">+</a>
+                            <a id="add-param-s" href="#" class="btn btn-outline-primary btn-sm mr-1" style="float:right">Slider</a>
+                    </h5>
+
+
+                    <div class="input-group shadow mb-1" id="param-0">
+                        <input style="width:5%" type="text" class="form-control param-param" placeholder="a">
+                        <input type="text" class="form-control param-value" placeholder="Value">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-danger param-del" type="button">del</button>
+                        </div>
+                    </div>
+
+
+                    <div class="card shadow mb-2" id="param-s-0">
+                        <div class="card-body pt-3 pb-3">
+                            <div class="input-group mb-1 input-group-sm">
+                                <input style="width:5%" type="text" class="form-control param-s-param" placeholder="a">
+                                <input type="text" style="width:5rem" class="form-control param-s-value" placeholder="Value">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-danger param-s-del" type="button">del</button>
+                                </div>
+                            </div>
+                            <div>
+                                <input type="range" min="1" max="101" value="1" class="slider param-s-slide">
+                            
+                            </div>
+                            <div class="input-group mb-1 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Range</span>
+                                </div>
+                                <input type="text" class="form-control param-s-from aux" placeholder="From">
+                                <input type="text" class="form-control param-s-to aux" placeholder="To">
+                            </div>
+                            <div class="input-group mb-1 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Step</span>
+                                </div>
+                                <input type="text" class="form-control param-s-step aux" placeholder="Step">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div id="author" class="justify-content-center"><span id="author-span" class="text-muted"><em>Developed by </em>Tim
+            Kmecl</span></div>
+</body>
+
+</html>

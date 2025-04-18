@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>TheTriangle</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="icon" sizes="144x144" href="media/icon-144.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://image.ibb.co/jhUhzJ/icon_144_2.png"> <!-- icon-144-2.png-->
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="media/favicon.ico?v=1.0">
+
+    <meta 
+        name='viewport' 
+        content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' 
+    />
+
+    <meta property="og:image" content="https://image.ibb.co/gAzkmy/za_fb.png" /> <!--za-fb.png-->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://tarca.tk/triangle" />
+  <meta property="og:title" content="TheTriangle" />
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+    <script src="Igra.js"></script>
+    <script src="main.js"></script>
+    <script src="network.js"></script>
+
+    <meta name="theme-color" content="#5ffff5">
+    
+</head>
+
+
+
+<body id = "body" onresize="onBodyResize()" onmouseup="setTimeout(function(){exitedWithDown = false;}, 10);" ontouchend="setTimeout(function(){exitedWithDown = false;}, 10);">
+    <div id="game">
+        <canvas id="canvas" onmousedown="down(event)" onmouseup="up(event)" ontouchstart="down(event)" ontouchend="up(event)" class = "canvas" height="100" width = "100"></canvas>
+        <div id="menu-frame">
+
+            <div id="menu" class="menu">
+                <img id="logo" class="logo" src="https://image.ibb.co/mNRHEJ/logo.png">
+                <img id="play" class="play" onclick="showGame()" src="media/play1.png" draggable="false">
+                <div id="login">
+                    <input type="text" name="input-name" id="input-name" class="textBox" placeholder="Username" onfocus="moveToTop(true);" onblur="moveToTop(false);">
+                    <input type="password" name="input-pass" id="input-pass" class="textBox" placeholder="Password" onfocus="moveToTop(true);" onblur="moveToTop(false);">
+                    <h3 id="login-as"></h3>
+                    <div id="login-btn" class="btn" onclick="onLogin()">Log in / Sign up</div>
+                </div>
+            </div>
+
+            <div id="results" class="menu">
+                <div id="scores">
+                    <h2 id="score">42</h2>
+                    <h3 id="record">0</h3>
+                </div>
+                <img id="play-re" class="play" onclick="showGame()" src="media/play1.png" draggable="false">
+                <div id="bottom-menu">
+                    <img id="lead-btn" onclick="if(!exitedWithDown){enterLead();}" src="media/lead.png">
+                    <img id="menu-btn" onclick="if(!exitedWithDown){window.history.back();}" src="media/menu1.png">
+                </div>
+                <!--<div id="login-btn-2" class="btn" onclick="window.history.back();">Log in/Sign up</div>
+                --></div>
+
+            <div id="leaderboards-menu" class="menu">
+                <img id="logo-lead" class="logo" onclick="window.history.back(-2);" src="https://image.ibb.co/mNRHEJ/logo.png">
+                <div id="leaderboards"></div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="menu.js"></script>
+    <script>
+            window.onload = function(e){
+                resize();
+                window.history.replaceState({}, "TheTriangle", [location.protocol, "//", location.host, location.pathname].join(''));
+            };
+
+            document.getElementById("play").oncontextmenu = stopLong;
+            if(/iPhone/i.test(navigator.userAgent)) {
+                delay=25;
+            }else{
+                delay = 25;
+                document.getElementById("play-re").oncontextmenu = stopLong;
+                document.getElementById("lead-btn").oncontextmenu = stopLong;
+                document.getElementById("menu-btn").oncontextmenu = stopLong;
+
+            }
+            
+            function stopLong(event){
+                event.preventDefault();
+                event.stopPropagation();
+                event.stopImmediatePropagation();
+                return false;
+            }
+
+            window.addEventListener('popstate', function(event){
+                if(window.location.search.substr(1)!=""){
+                    window.history.back();
+                    return false;
+                }
+                window.history.replaceState({}, "TheTriangle", [location.protocol, "//", location.host, location.pathname].join(''));
+                document.querySelector('meta[name="theme-color"]').setAttribute("content", "#5ffff5");
+
+                igra = "";
+                var lastFrameTimeMs = 0;
+                score = 0;
+                allowed = true;
+                started = false;
+                restarted = false;
+                exitedWithDown = false;
+                document.getElementById("results").style.display = "none";
+                document.getElementById("canvas").style.display = "none";
+                document.getElementById("leaderboards-menu").style.display = "none";
+                document.getElementById("menu").style.display = "flex";
+                resize();
+                toggleLogin();
+            })
+        
+    </script>
+</body>
+</html>

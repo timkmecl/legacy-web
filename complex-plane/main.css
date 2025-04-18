@@ -1,0 +1,72 @@
+body, html{
+	touch-action: manipulation;
+	height: 100vh;
+	width: 100vw;
+	/*position: fixed;*/
+}
+
+body{
+	margin: 0px;
+	/*overflow: hidden;*/
+}
+
+#canvas{
+	height: 100vh;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#sidebar{
+	overflow:auto;
+	height:100vh;
+}
+
+
+#functInGroup{
+	margin: 1em auto;
+}
+
+#fAnimStep{
+	width:100%;
+}
+
+#grid-0{
+	display:none;
+}
+#line-0{
+	display:none;
+}
+#point-0{
+	display:none;
+}
+#param-0{
+	display:none;
+}
+#param-s-0{
+	display:none;
+}
+
+.card-body{
+	text-align: center;
+}
+
+.pagination{
+}
+
+.slider{
+	width:100%;
+}
+
+
+#author{
+	padding-bottom:0em;
+	text-align: center;
+	position: absolute;
+	bottom: 0.5em;
+	right:1em;
+}
+
+#author-span{
+	font-size: 10pt;
+}

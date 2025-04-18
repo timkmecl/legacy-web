@@ -1,0 +1,18 @@
+body, html{
+    touch-action: manipulation;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
+
+body{
+    margin: 0px;
+    overflow: hidden;
+}
+
+#canvas{
+    height:100%;
+    width:100%;
+    margin: 0px;
+    padding: 0px;
+}

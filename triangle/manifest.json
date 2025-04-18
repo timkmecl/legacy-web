@@ -1,0 +1,14 @@
+{
+  "short_name": "TheTriangle",
+  "name": "TheTriangle",
+  "icons": [
+    {
+      "src": "media/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#282828"
+}
